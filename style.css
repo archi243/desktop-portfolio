@@ -8,6 +8,11 @@
 }
 
 /* ========== GLOBAL STYLES ========== */
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -83,22 +88,31 @@ body {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-color);
-  color: var(--text-color);
 }
 
-/* ========== DESKTOP BACKGROUND ========== */
+/* ========== BACKGROUND IMAGE ========== */
+.fullscreen-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
 .fullscreen-image img {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 /* ========== DESKTOP ICONS ========== */
 .desktop-icons {
   position: absolute;
   top: 70px;
-  left: 80px;
+  left: 60px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -107,12 +121,6 @@ body {
 .folder {
   text-align: center;
   cursor: pointer;
-  background: none;
-  border: none;
-  pointer-events: auto;
-  position: relative;
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
 .folder-img {
@@ -123,11 +131,10 @@ body {
 
 .folder p {
   margin: 6px 0 0;
-  font-size: 20px;
-  color: var(--text-color);
+  font-size: 18px;
 }
 
-/* ========== WINDOW ========== */
+/* ========== WINDOWS ========== */
 .window {
   position: absolute;
   top: 150px;
@@ -136,11 +143,9 @@ body {
   background: var(--bg-color);
   border: 2px solid var(--border-color);
   box-shadow: 5px 5px 0 var(--accent-color);
-  font-family: 'Courier New', monospace;
   color: var(--text-color);
   z-index: 10;
   transition: all 0.3s ease;
-  cursor: default;
 }
 
 .window-header {
@@ -150,7 +155,6 @@ body {
   justify-content: space-between;
   align-items: center;
   cursor: move;
-  user-select: none;
   color: var(--titlebar-text);
 }
 
@@ -170,7 +174,6 @@ body {
   border: none;
   background: #ff90b3;
   color: white;
-  font-weight: bold;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -182,21 +185,10 @@ body {
 .window-body {
   padding: 16px;
   font-size: 14px;
-  background: var(--bg-color);
-  color: var(--text-color);
 }
 
 .minimized .window-body {
   display: none;
-}
-
-.minimized {
-  animation: minimizeFade 0.3s ease forwards;
-}
-
-@keyframes minimizeFade {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.4; }
 }
 
 .maximized {
@@ -216,7 +208,7 @@ body {
 #taskbar {
   position: absolute;
   bottom: 0;
-  left: 50;
+  left: 0;
   width: 100%;
   height: 40px;
   background: var(--titlebar-color);
@@ -238,14 +230,14 @@ body {
 }
 
 #clock {
-  position: absolute; /* or fixed, if needed */
-  right: 50px;         /* adjust this number to move it more or less left */
-  top: 10px;           /* adjust top positioning as needed */
+  position: absolute;
+  right: 20px;
+  top: 8px;
   font-family: monospace;
   z-index: 999;
 }
 
-
+/* ========== START MENU ========== */
 #start-menu {
   position: absolute;
   bottom: 40px;
@@ -268,80 +260,7 @@ body {
   color: var(--titlebar-text);
 }
 
-/* ========== TECH STACK GRID ========== */
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-  gap: 20px;
-  padding: 10px;
-  justify-items: center;
-  align-items: center;
-}
-
-.stack-icon {
-  width: 60px;
-  height: 60px;
-}
-
-.stack-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.tech-grid img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-
-/* ========== PROJECT LIST ========== */
-.project-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-}
-
-.project-list li {
-  margin-bottom: 8px;
-}
-
-.project-list a {
-  text-decoration: none;
-  color: var(--titlebar-text);
-  font-weight: bold;
-}
-
-.project-list a:hover {
-  text-decoration: underline;
-}
-
-/* ========== CONTACT FORM ========== */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  padding: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-color);
-  color: var(--text-color);
-  font-family: inherit;
-}
-
-.contact-form button {
-  background: var(--accent-color);
-  border: none;
-  padding: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  color: var(--titlebar-text);
-}
-
-/* ========== FLOATING CHAT TERMINAL ========== */
+/* ========== FLOATING CHAT ========== */
 #chat-terminal-icon {
   position: fixed;
   bottom: 60px;
@@ -358,7 +277,6 @@ body {
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   cursor: pointer;
   z-index: 9999;
-  transition: transform 0.2s ease;
 }
 
 #chat-terminal-icon:hover {
@@ -395,15 +313,12 @@ body {
   padding: 10px;
   overflow-y: auto;
   font-size: 13px;
-  color: var(--text-color);
-  background: var(--bg-color);
 }
 
 .chat-input-container {
   display: flex;
   padding: 10px;
   border-top: 1px solid var(--border-color);
-  background: var(--bg-color);
 }
 
 .chat-input-container input {
@@ -412,7 +327,6 @@ body {
   border: 1px solid var(--border-color);
   background: var(--bg-color);
   color: var(--text-color);
-  font-family: inherit;
 }
 
 .chat-input-container button {
@@ -424,177 +338,71 @@ body {
   margin-left: 5px;
 }
 
-/* ========== NO SELECTION/DRAG ON BACKGROUND OR ICONS ========== */
-* {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.fullscreen-image img,
-.desktop-icons,
-.desktop-icons *,
-.folder,
-.folder-img,
-.folder p {
-  pointer-events: none;
-}
-
-.folder,
-.folder-img,
-.folder p {
-  pointer-events: auto;
-}
-
-/* ========== RESPONSIVE STYLING ========== */
-/* ========== ADDITIONAL RESPONSIVE IMPROVEMENTS ========== */
-
-/* Tablets & Small Laptops */
+/* ========== RESPONSIVE MEDIA QUERIES ========== */
 @media (max-width: 768px) {
   .desktop-icons {
-    position: absolute;
-    top: 90px;
-    left: 10%;
+    left: 50%;
+    top: 70px;
     transform: translateX(-50%);
-    flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
   }
 
+  .folder-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .folder p {
+    font-size: 14px;
+  }
+
+  .window {
+    width: 90vw;
+    left: 5vw;
+    top: 10vh;
+  }
+
+  .chat-terminal-window {
+    width: 90vw;
+    height: 50vh;
+    right: 5vw;
+    bottom: 80px;
+  }
+
+  #start-menu {
+    width: 80vw;
+  }
+
+  #clock {
+    font-size: 12px;
+    top: 5px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
   .folder-img {
     width: 60px;
     height: 60px;
   }
 
   .folder p {
-    font-size: 14px;
-  }
-
-  .window {
-    width: 90vw;
-    top: 10vh;
-    left: 5vw;
+    font-size: 12px;
   }
 
   .chat-terminal-window {
-    width: 85vw;
-    height: 50vh;
-    bottom: 80px;
-  }
-
-  .chat-body {
-    font-size: 12px;
-  }
-
-  #clock {
-    top: 5px;
-    right: 25px;
-    font-size: 12px;
-  }
-}
-
-/* Phones */
-@media (max-width: 480px) {
-  .desktop-icons {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    top: 15px;
-    left: 10px;
-  }
-
-  .folder-img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .folder p {
-    font-size: 12px;
-  }
-
-  .window {
-    width: 94vw;
-    top: 10vh;
-    left: 3vw;
-  }
-
-  .window-header {
-    padding: 6px;
-  }
-
-  .window-body {
-    padding: 10px;
-    font-size: 12px;
+    height: 45vh;
   }
 
   #start-btn {
-    padding: 4px 6px;
-    font-size: 12px;
-  }
-
-  #start-menu {
-    width: 90vw;
-    left: 5vw;
-    font-size: 14px;
-  }
-
-  .start-item {
-    padding: 8px;
+    padding: 4px 8px;
+    font-size: 13px;
   }
 
   #chat-terminal-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
   }
-
-  .chat-terminal-window {
-    width: 95vw;
-    height: 50vh;
-    bottom: 75px;
-    right: 2.5vw;
-  }
-
-  .chat-header,
-  .chat-input-container {
-    padding: 8px;
-  }
-
-  .chat-input-container input {
-    font-size: 14px;
-  }
-
-  .chat-input-container button {
-    font-size: 14px;
-  }
-
-  .tech-grid {
-    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-    gap: 12px;
-  }
-
-  .stack-icon,
-  .tech-grid img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .fullscreen-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Push behind all desktop content */
-  overflow: hidden;
-}
-
-.fullscreen-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 }
