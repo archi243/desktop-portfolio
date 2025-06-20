@@ -448,83 +448,153 @@ body {
 }
 
 /* ========== RESPONSIVE STYLING ========== */
-@media (max-width: 1024px) {
-  .window {
-    width: min(90vw, 400px);
-    max-height: 90vh;
-    left: 5vw;
-    top: 10vh;
-  }
+/* ========== ADDITIONAL RESPONSIVE IMPROVEMENTS ========== */
 
-  .window-body {
-    max-height: calc(90vh - 40px);
-    overflow-y: auto;
-  }
-
-  .chat-terminal-window {
-    width: 90vw;
-    height: 60vh;
-    right: 5vw;
-    bottom: 80px;
-  }
-
+/* Tablets & Small Laptops */
+@media (max-width: 768px) {
   .desktop-icons {
-    top: 30px;
-    left: 30px;
+    position: absolute;
+    top: 90px;
+    left: 10%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
   }
 
   .folder-img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 
   .folder p {
-    font-size: 16px;
+    font-size: 14px;
   }
 
-  .tech-grid {
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  .window {
+    width: 90vw;
+    top: 10vh;
+    left: 5vw;
+  }
+
+  .chat-terminal-window {
+    width: 85vw;
+    height: 50vh;
+    bottom: 80px;
+  }
+
+  .chat-body {
+    font-size: 12px;
+  }
+
+  #clock {
+    top: 5px;
+    right: 25px;
+    font-size: 12px;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .desktop-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
-    padding: 0 12px;
+    top: 15px;
+    left: 10px;
   }
 
-  .stack-icon {
+  .folder-img {
     width: 50px;
     height: 50px;
   }
 
-  .tech-grid img {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  #chat-terminal-icon {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-    bottom: 60px;
-    right: 15px;
+  .folder p {
+    font-size: 12px;
   }
 
-  #start-menu {
-    width: 80vw;
+  .window {
+    width: 94vw;
+    top: 10vh;
+    left: 3vw;
+  }
+
+  .window-header {
+    padding: 6px;
+  }
+
+  .window-body {
+    padding: 10px;
+    font-size: 12px;
   }
 
   #start-btn {
-    padding: 4px 8px;
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  #start-menu {
+    width: 90vw;
+    left: 5vw;
     font-size: 14px;
   }
 
-  #taskbar {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 5px 10px;
+  .start-item {
+    padding: 8px;
+  }
+
+  #chat-terminal-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 
   .chat-terminal-window {
+    width: 95vw;
     height: 50vh;
+    bottom: 75px;
+    right: 2.5vw;
   }
+
+  .chat-header,
+  .chat-input-container {
+    padding: 8px;
+  }
+
+  .chat-input-container input {
+    font-size: 14px;
+  }
+
+  .chat-input-container button {
+    font-size: 14px;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 12px;
+  }
+
+  .stack-icon,
+  .tech-grid img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .fullscreen-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Push behind all desktop content */
+  overflow: hidden;
+}
+
+.fullscreen-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 }
