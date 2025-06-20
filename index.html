@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pastel Paint OS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen">
+    <div class="terminal">
+      <h1 class="flicker">BOOTING PASTEL OS...</h1>
+      <p class="typewriter">Initializing GUI...</p>
+      <p class="command" id="loading-text">> Loading modules<span class="blinking-cursor">|</span></p>
+    </div>
+  </div>
+
+  <!-- MAIN SCREEN -->
+  <div id="main-screen" class="hidden">
+    <div class="fullscreen-image">
+      <img src="background.gif" alt="Paint Background" />
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="folder" onclick="openFolder('About Me')">
+        <img src="images/aboutme.png" class="folder-img" alt="About Me" />
+        <p>About Me</p>
+      </div>
+
+      <div class="folder" onclick="openFolder('My Work')">
+        <img src="images/mywork.png" class="folder-img" alt="My Work" />
+        <p>My Work</p>
+      </div>
+
+      <div class="folder" onclick="openFolder('Tech Stack')">
+        <img src="images/techstack.png" class="folder-img" alt="Tech Stack" />
+        <p>Tech Stack</p>
+      </div>
+
+      <div class="folder" onclick="openFolder('Contact Me')">
+        <img src="images/contactme.png" class="folder-img" alt="Contact Me" />
+        <p>Contact Me</p>
+      </div>
+
+      <div class="folder" onclick="openFolder('Recycle Bin')">
+        <img src="images/recyclebin.png" class="folder-img" alt="Recycle Bin" />
+        <p>Recycle Bin</p>
+      </div>
+    </div>
+
+    <!-- Taskbar with Start -->
+<!-- TASKBAR with Start button + CLOCK -->
+<div id="taskbar">
+  <button id="start-btn">Start</button>
+  <div id="clock"></div>
+</div>
+
+<!-- START MENU -->
+<div id="start-menu" class="hidden">
+  <div class="start-item" onclick="lockComputer()">🔒 Logout</div>
+  <div class="start-item" onclick="openFolder('Settings')">⚙️ Settings</div>
+</div>
+
+
+    <!-- Window Template -->
+    <div id="window-template" class="window hidden">
+      <div class="window-header">
+        <span class="window-title">Window</span>
+        <div class="window-buttons">
+          <button class="minimize-btn">—</button>
+          <button class="maximize-btn"><i class='bx bx-margin-bottom'></i></button>
+          <button class="close-btn">✕</button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>This is the folder content.</p>
+      </div>
+    </div>
+  </div>
+<!-- Floating Chat Icon -->
+<div id="chat-terminal-icon" class="hidden" onclick="toggleChatTerminal()">💬</div>
+
+<!-- Chat Window -->
+<div id="chat-terminal-window" class="chat-terminal-window hidden">
+  <div class="chat-header">
+    <span>Chat Assistant</span>
+    <button onclick="toggleChatTerminal()">×</button>
+  </div>
+  <div class="chat-body" id="chat-output"></div>
+  <div class="chat-input-container">
+    <input id="chat-input" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter') handleChatSubmit()" />
+    <button onclick="handleChatSubmit()">Send</button>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+  <script>
+  const windows = document.querySelectorAll('.window');
+
+  windows.forEach(windowEl => {
+    const header = windowEl.querySelector('.window-header');
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let isDragging = false;
+
+    header.addEventListener('mousedown', (e) => {
+      isDragging = true;
+
+      // Bring to front
+      windowEl.style.zIndex = Date.now();
+
+      offsetX = e.clientX - windowEl.offsetLeft;
+      offsetY = e.clientY - windowEl.offsetTop;
+
+      document.addEventListener('mousemove', moveWindow);
+      document.addEventListener('mouseup', stopDrag);
+    });
+
+    function moveWindow(e) {
+      if (!isDragging) return;
+      windowEl.style.left = `${e.clientX - offsetX}px`;
+      windowEl.style.top = `${e.clientY - offsetY}px`;
+    }
+
+    function stopDrag() {
+      isDragging = false;
+      document.removeEventListener('mousemove', moveWindow);
+      document.removeEventListener('mouseup', stopDrag);
+    }
+  });
+</script>
+
+</body>
+</html>
