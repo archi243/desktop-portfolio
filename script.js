@@ -125,9 +125,9 @@ function openFolder(name) {
       body.innerHTML = `
         <h2>📁 Projects</h2>
         <ul class="project-list">
-          <li><a href="https://github.com/yourname/project1" target="_blank">🌐 Portfolio Website</a></li>
-          <li><a href="https://github.com/yourname/project2" target="_blank">📲 Fitness App</a></li>
-          <li><a href="https://github.com/yourname/project3" target="_blank">🎮 JavaScript Game</a></li>
+          <li><a href="https://github.com/archi243/desktop-portfolio.git" target="_blank">🌐 Portfolio Website</a></li>
+          <li><a href="https://github.com/archi243/Portfolio2.git" target="_blank">📲 Resume Portfolio</a></li>
+          <li><a href="hhttps://github.com/archi243/Day-Night-Animation.git" target="_blank">🎮 Css Animation</a></li>
         </ul>
       `;
       break;
